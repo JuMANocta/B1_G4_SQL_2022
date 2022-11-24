@@ -115,3 +115,19 @@ VALUES
 ('Macéo', 'Martin', 'Lyon', 60),
 ('Maxime', 'Bernard', 'Marseille', 65),
 ('Tom', 'Leroy', 'Grenoble', 70);
+-- afficher l'age moyen des personnes (avg)
+SELECT AVG(age) AS 'Age moyen' FROM client;
+-- afficher l'age maximum des personnes (max)
+SELECT MAX(age) AS 'Age maximum' FROM client;
+-- afficher l'age minimum des personnes (min)
+SELECT MIN(age) AS 'Age minimum' FROM client;
+-- afficher le nombre de personne (count)
+SELECT COUNT(*) AS 'Nombre de personne' FROM client;
+-- afficher le nombre de personnes par ville (count)
+SELECT ville, COUNT(*) AS 'Nombre de personne' FROM client GROUP BY ville;
+-- afficher le nombre de personnes par ville et par age (count)
+SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client GROUP BY ville, age;
+-- afficher le nombre de personnes par ville et par age (count) et trier par ville et age
+SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client GROUP BY ville, age ORDER BY ville, age;
+-- afficher le nombre de personne par ville et par age (count) et trier par ville et age et afficher uniquement les personnes qui ont plus de 50 ans
+SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client WHERE age > 50 GROUP BY ville, age ORDER BY ville, age;
