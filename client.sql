@@ -131,3 +131,24 @@ SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client GROUP BY ville, 
 SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client GROUP BY ville, age ORDER BY ville, age;
 -- afficher le nombre de personne par ville et par age (count) et trier par ville et age et afficher uniquement les personnes qui ont plus de 50 ans
 SELECT ville, age, COUNT(*) AS 'Nombre de personne' FROM client WHERE age > 50 GROUP BY ville, age ORDER BY ville, age;
+
+DROP TABLE IF EXISTS personne;
+CREATE TABLE IF NOT EXISTS personne (
+    id_personne INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(25) NOT NULL,
+    prenom VARCHAR(25) NOT NULL,
+    age INT NOT NULL
+);
+INSERT INTO personne (nom, prenom, age)
+VALUES
+('Dupont', 'Jean', 55),
+('DUCHEMIN', 'Rob', 48),
+('DUPUIS', 'Nadia', 36),
+('ROVIER', 'Monique', 63),
+('DUPUIS', 'Olivier', 33),
+('ROLLAND', 'Gérard', 64),
+('ROLIN', 'Claire', 42),
+('MARTINEAU', 'Jean', 57),
+('MARTINET', 'Bob', 45);
+
+SELECT nom, COUNT(*) AS 'Double' FROM personne GROUP BY nom;
