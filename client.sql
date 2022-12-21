@@ -181,6 +181,13 @@ WHERE libelle = (
     FROM personne
     JOIN langue ON personne.id_langue = langue.id
     GROUP BY libelle
-    ORDER BY COUNT(*)
-    DESC LIMIT 1
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
 );
+--La clause FROM définit les tables sur lesquelles la requête va agir, tandis que la clause JOIN permet de lier les tables personne et langue en utilisant l'identifiant de langue dans la table personne (id_langue) et l'identifiant de langue dans la table langue (id).
+
+-- La clause WHERE utilise une sous-requête pour déterminer la langue la plus parlée. La sous-requête utilise la clause GROUP BY pour regrouper les lignes de la table langue par libellé de langue, et la fonction COUNT pour compter le nombre de lignes dans chaque groupe.
+
+--La clause ORDER BY permet de trier les résultats par ordre décroissant de nombre de lignes, et la clause LIMIT 1 permet de ne retenir que la première ligne (c'est-à-dire la langue la plus parlée).
+
+--La clause SELECT indique les colonnes que vous souhaitez obtenir dans les résultats de la requête. Dans ce cas, nous sélectionnons le nom et le prénom de la personne (nom et prenom).
