@@ -152,3 +152,17 @@ VALUES
 ('MARTINET', 'Bob', 45);
 
 SELECT nom, COUNT(*) AS 'Double' FROM personne GROUP BY nom;
+
+SELECT nom, prenom, age,
+CASE
+    WHEN age < 18 THEN 'Mineur'
+    WHEN age >= 18 AND age < 60 THEN 'Majeur'
+    WHEN age >= 60 THEN 'Senior'
+END AS 'Catégorie'
+FROM personne
+ORDER BY nom, prenom;
+
+SELECT NOW() 'date & heure', DATE(NOW()) 'date', TIME(NOW()) 'heure';
+
+SELECT DATEDIFF(NOW(), '2022-01-01') 'Nombre de jours depuis le 1er janvier 2019';
+
