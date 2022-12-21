@@ -241,3 +241,18 @@ END //
 DELIMITER ;
 
 CALL creation_personne('DUPONT', 'Jean', 45);
+
+-- La commande CREATE PROCEDURE permet de créer une procédure stockée en spécifiant son nom (creation_personne) et les paramètres qu'elle accepte (ici, nom, prenom et age). Le corps de la procédure est défini entre les déclarations BEGIN et END.
+
+-- Vous pouvez ensuite ajouter les instructions SQL que vous souhaitez exécuter dans le corps de la procédure. Dans cet exemple, nous ajoutons une instruction INSERT INTO pour insérer une nouvelle ligne dans la table personne.
+
+-- Pour lancer la procédure, vous devez utiliser la commande CALL suivi du nom de la procédure et des valeurs des paramètres.
+
+CREATE FUNCTION fonction_cube(valeur_entree INT)
+RETURNS BIGINT RETURN valeur_entree * valeur_entree * valeur_entree;
+
+-- La commande CREATE FUNCTION permet de créer une fonction en spécifiant son nom (fonction_cube) et les paramètres qu'elle accepte (ici, valeur_entree). Le corps de la fonction est défini entre les déclarations BEGIN et END.
+
+-- Pour lancer la fonction, vous devez utiliser la commande SELECT suivi du nom de la fonction et des valeurs des paramètres.
+SELECT fonction_cube(3);
+
