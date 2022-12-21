@@ -191,3 +191,53 @@ WHERE libelle = (
 --La clause ORDER BY permet de trier les résultats par ordre décroissant de nombre de lignes, et la clause LIMIT 1 permet de ne retenir que la première ligne (c'est-à-dire la langue la plus parlée).
 
 --La clause SELECT indique les colonnes que vous souhaitez obtenir dans les résultats de la requête. Dans ce cas, nous sélectionnons le nom et le prénom de la personne (nom et prenom).
+
+SELECT *
+FROM personne
+WHERE EXISTS (SELECT *
+            FROM personne
+            WHERE age >= 62);
+
+-- La clause FROM définit la table sur laquelle la requête va agir. La clause WHERE utilise la fonction EXISTS pour vérifier si il existe au moins une ligne dans la sous-requête qui satisfait la condition age >= 62. Si c'est le cas, la requête retourne toutes les lignes de la table personne.
+
+-- La clause SELECT indique les colonnes que vous souhaitez obtenir dans les résultats de la requête. Dans ce cas, nous utilisons l'opérateur * pour sélectionner toutes les colonnes de la table personne.
+
+SELECT nom, prenom
+FROM personne AS p1
+WHERE EXISTS (SELECT 1
+            FROM personne AS p2
+            WHERE p2.nom = p1.nom AND p2.prenom <> p1.prenom)
+
+-- La clause FROM définit la table sur laquelle la requête va agir. La clause WHERE utilise la fonction EXISTS et une sous-requête corrélée pour vérifier si il existe au moins une ligne dans la sous-requête qui a le même nom que la ligne courante de la requête principale (c'est-à-dire celles qui satisfont la condition p2.nom = p.nom) et un prénom différent (c'est-à-dire celles qui satisfont la condition p2.prenom <> p.prenom).
+
+DROP PROCEDURE IF EXISTS creation_personne;
+DELIMITER //
+CREATE PROCEDURE creation_personne()
+BEGIN
+    INSERT INTO personne (nom, prenom, age)
+    VALUES
+    ('MARTIN', 'Jeanine', 64);
+END //
+DELIMITER ;
+
+-- La commande CREATE PROCEDURE permet de créer une procédure stockée en spécifiant son nom (creation_personne) et les paramètres qu'elle accepte (ici, aucun). Le corps de la procédure est défini entre les déclarations BEGIN et END.
+
+-- Vous pouvez ensuite ajouter les instructions SQL que vous souhaitez exécuter dans le corps de la procédure. Dans cet exemple, nous ajoutons une instruction INSERT INTO pour insérer une nouvelle ligne dans la table personne.
+
+-- Pour lancer la procédure, vous devez utiliser la commande CALL suivi du nom de la procédure.
+CALL creation_personne();
+
+DROP PROCEDURE IF EXISTS creation_personne;
+DELIMITER //
+CREATE PROCEDURE creation_personne(
+    IN nom VARCHAR(50),
+    IN prenom VARCHAR(50),
+    IN age INT)
+BEGIN
+    INSERT INTO personne (nom, prenom, age)
+    VALUES
+    (nom, prenom, age);
+END //
+DELIMITER ;
+
+CALL creation_personne('DUPONT', 'Jean', 45);
